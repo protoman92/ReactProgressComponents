@@ -1,8 +1,8 @@
 import { Observable, Observer } from 'rxjs';
-import { ReduxStore } from 'reactiveredux-js';
+import { ReduxStore } from 'reactive-rx-redux-js';
 import { Nullable, Try } from 'javascriptutilities';
-import { State as S } from 'typesafereduxstate-js';
-import { Data, MVVM } from 'reactutilities-js';
+import { State as S } from 'type-safe-state-js';
+import { Data, MVVM } from 'react-base-utilities-js';
 
 export type ProgressItem = Data.Progress.Type | boolean;
 

@@ -1,8 +1,8 @@
 import { BehaviorSubject, Observable, Observer } from 'rxjs';
-import { ReduxStore, RxReducer } from 'reactiveredux-js';
+import { ReduxStore, RxReducer } from 'reactive-rx-redux-js';
 import { IncompletableSubject, Nullable, Try } from 'javascriptutilities';
-import { State as S } from 'typesafereduxstate-js';
-import { MVVM } from 'reactutilities-js';
+import { State as S } from 'type-safe-state-js';
+import { MVVM } from 'react-base-utilities-js';
 import * as Base from './base';
 import { ProgressItem } from './base';
 

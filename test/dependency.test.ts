@@ -1,8 +1,8 @@
 import { Observable, Subscription } from 'rxjs'; 
 import { Numbers } from 'javascriptutilities';
 import { Strings } from 'javascriptutilities/dist/src/string';
-import { ReduxStore } from 'reactiveredux-js';
-import { Data } from 'reactutilities-js';
+import { ReduxStore } from 'reactive-rx-redux-js';
+import { Data } from 'react-base-utilities-js';
 import { ProgressDisplay } from './../src';
 
 let timeout = 100;

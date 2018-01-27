@@ -1,7 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 import { Nullable, Try } from 'javascriptutilities';
-import { State as S } from 'typesafereduxstate-js';
-import { Component, MVVM } from 'reactutilities-js';
+import { State as S } from 'type-safe-state-js';
+import { Component, MVVM } from 'react-base-utilities-js';
 import { Base, ProgressItem } from './../dependency';
 import * as Presets from './presets';
 
