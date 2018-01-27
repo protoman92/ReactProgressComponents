@@ -1,0 +1,83 @@
+$base-anim-delay: 0.6;
+$base-anim-factor: $base-anim-delay / 4;
+$cube-dimen: 3.5vw;
+
+@mixin child-cube-dimen() {
+  height: $cube-dimen / 3;
+  width: $cube-dimen / 3;
+}
+
+@mixin child-cube-anim-delay($multiplier) {
+  -webkit-animation-delay: #{$multiplier * $base-anim-factor}s;
+  animation-delay: #{$multiplier * $base-anim-factor}s;
+}
+
+.pd-cube-grid-container {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  height: $cube-dimen;
+  width: $cube-dimen;
+}
+
+.pd-cube-grid {
+  @include child-cube-dimen();
+  background: currentColor;
+  -webkit-animation: pd-transform #{$base-anim-delay}s infinite ease-in-out;
+  animation: pd-transform #{$base-anim-delay}s infinite ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.pd-cube-grid:nth-child(1) {
+  @include child-cube-anim-delay(0);
+}
+
+.pd-cube-grid:nth-child(2) {
+  @include child-cube-anim-delay(1);
+}
+
+.pd-cube-grid:nth-child(3) {
+  @include child-cube-anim-delay(2);
+}
+
+.pd-cube-grid:nth-child(4) {
+  @include child-cube-anim-delay(1);
+}
+
+.pd-cube-grid:nth-child(5) {
+  @include child-cube-anim-delay(2);
+}
+
+.pd-cube-grid:nth-child(6) {
+  @include child-cube-anim-delay(3);
+}
+
+.pd-cube-grid:nth-child(7) {
+  @include child-cube-anim-delay(2);
+}
+
+.pd-cube-grid:nth-child(8) {
+  @include child-cube-anim-delay(3);
+}
+
+.pd-cube-grid:nth-child(9) {
+  @include child-cube-anim-delay(4);
+}
+
+@keyframes pd-transform {
+  0%, 100% {
+    -webkit-transform: scale(0.0);
+    transform: scale(0.0);
+  }
+  
+  50% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+@-webkit-keyframes pd-transform {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}

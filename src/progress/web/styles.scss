@@ -1,0 +1,36 @@
+$transition-duration: 300ms;
+
+@mixin transition() {
+  -webkit-transition: $transition-duration;
+  -moz-transition: $transition-duration;
+  -o-transition: $transition-duration;
+  transition: $transition-duration;
+}
+
+.progress-display {
+  @include transition();
+  display: flex;
+  margin: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.progress-display-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.progress-display-background {
+  @include transition();
+  background: lightgray;
+  height: 100%;
+  opacity: 0.5;
+  pointer-events: all;
+  position: absolute;
+  width: 100%;
+}
+
+.progress-display-background-hidden {
+  background: none;
+  pointer-events: none;
+}

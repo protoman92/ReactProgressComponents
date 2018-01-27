@@ -1,0 +1,92 @@
+$ball-proportion: 12%;
+$base-anim-delay: 1.0;
+$base-anim-offset: $base-anim-delay / 12;
+$base-rotation: -30;
+$circle-dimen: 4vw;
+
+@mixin ball-transform($multiplier) {
+  -webkit-transform: rotate(#{$multiplier * $base-rotation}deg);
+  transform: rotate(#{$multiplier * $base-rotation}deg);
+}
+
+@mixin ball-anim-delay($multiplier) {
+  -webkit-animation-delay: #{$base-anim-delay - $multiplier * $base-anim-offset}s;
+  animation-delay: #{$base-anim-delay - $multiplier * $base-anim-offset}s;
+}
+
+.pd-circle-container {
+  background: none;
+  display: block;
+  position: relative;
+  height: $circle-dimen;
+  width: $circle-dimen;
+}
+
+/// Each of these will fill up the main circle container, but they will be
+/// rotated so that their center points form a circle. We then animate these
+/// center points by scaling them from 0.0 to 1.0, yielding a chase animation
+/// whereby each ball scales into view then back to 0 again.
+.pd-circle {
+  background-color: initial;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  width: 100%;
+}
+
+.pd-circle::before {
+  background-color: currentColor;
+  border-radius: 100%;
+  content: '';
+  display: block;
+  height: $ball-proportion;
+  margin: 0 auto;
+  width: $ball-proportion;
+
+  -webkit-animation: pd-transform #{$base-anim-delay}s infinite ease-in-out;
+  animation: pd-transform #{$base-anim-delay}s infinite ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.pd-circle:nth-child(2) { @include ball-transform(1); }
+.pd-circle:nth-child(3) { @include ball-transform(2); }
+.pd-circle:nth-child(4) { @include ball-transform(3); }
+.pd-circle:nth-child(5) { @include ball-transform(4); }
+.pd-circle:nth-child(6) { @include ball-transform(5); }
+.pd-circle:nth-child(7) { @include ball-transform(6); }
+.pd-circle:nth-child(8) { @include ball-transform(7); }
+.pd-circle:nth-child(9) { @include ball-transform(8); }
+.pd-circle:nth-child(10) { @include ball-transform(9); }
+.pd-circle:nth-child(11) { @include ball-transform(10); }
+.pd-circle:nth-child(12) { @include ball-transform(11); }
+
+.pd-circle:nth-child(2)::before { @include ball-anim-delay(1); }
+.pd-circle:nth-child(3)::before { @include ball-anim-delay(2); }
+.pd-circle:nth-child(4)::before { @include ball-anim-delay(3); }
+.pd-circle:nth-child(5)::before { @include ball-anim-delay(4); }
+.pd-circle:nth-child(6)::before { @include ball-anim-delay(5); }
+.pd-circle:nth-child(7)::before { @include ball-anim-delay(6); }
+.pd-circle:nth-child(8)::before { @include ball-anim-delay(7); }
+.pd-circle:nth-child(9)::before { @include ball-anim-delay(8); }
+.pd-circle:nth-child(10)::before { @include ball-anim-delay(9); }
+.pd-circle:nth-child(11)::before { @include ball-anim-delay(10); }
+.pd-circle:nth-child(12)::before { @include ball-anim-delay(11); }
+
+@keyframes pd-transform {
+  0%, 100% {
+    -webkit-transform: scale(0.0);
+    transform: scale(0.0);
+  }
+  
+  50% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+@-webkit-keyframes pd-transform {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
