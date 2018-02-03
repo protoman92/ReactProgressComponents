@@ -1,6 +1,6 @@
 {
   "name": "react-progress-display-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MVVM-based progress components for React applications.",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/protoman92/ReactProgressComponents#readme",
   "dependencies": {
-    "react-base-utilities-js": "^1.0.1"
+    "react-base-utilities-js": "^1.0.1",
+    "react-native-basic-components": "^1.0.5"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.8",

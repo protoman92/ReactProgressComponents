@@ -1,15 +1,15 @@
 import { Subscription } from 'rxjs';
 import { Nullable } from 'javascriptutilities';
-import { Base } from './dependency';
-import { ProgressItem } from './dependency/base';
+import * as Base from './base';
+import { ProgressItem } from './base';
 
 /**
  * Displayable interface that can display progress. The top app component should
  * implement this to handle progress displaying.
  */
 export interface Type {
-  viewModel: Readonly<Base.ViewModel.Type>;
-  subscription: Subscription;
+  readonly viewModel: Readonly<Base.ViewModel.Type>;
+  readonly subscription: Subscription;
   toggleProgress(progress: Nullable<ProgressItem>): void;
 }
 

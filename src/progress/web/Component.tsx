@@ -11,13 +11,13 @@ export namespace Props {
    * Props type for progress display component.
    */
   export interface Type {
-    identity?: Identity.ProviderType;
-    viewModel: ViewModel.Self;
+    readonly identity?: Identity.ProviderType;
+    readonly viewModel: ViewModel.Self;
 
     /**
      * We can declare the preset progress display component here.
      */
-    presetComponent?: Presets.Case;
+    readonly presetComponent?: Presets.Case;
 
     /**
      * If we do not want to default progress display item, we can create a
@@ -30,9 +30,9 @@ export namespace Props {
 
 /**
  * Component for progress display.
- * @extends {Component<Props.Type,State.Self<any>>} Component extension.
+ * @extends {Component<Props.Type,State.Type<any>>} Component extension.
  */
-export class Self extends Component<Props.Type,State.Self<any>> {
+export class Self extends Component<Props.Type,State.Type<any>> {
   private readonly viewModel: ViewModel.Self;
   private readonly subscription: Subscription;
 

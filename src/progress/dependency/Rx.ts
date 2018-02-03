@@ -3,8 +3,8 @@ import { ReduxStore, RxReducer } from 'reactive-rx-redux-js';
 import { IncompletableSubject, Nullable, Try } from 'javascriptutilities';
 import { State as S } from 'type-safe-state-js';
 import { MVVM } from 'react-base-utilities-js';
-import * as Base from './base';
-import { ProgressItem } from './base';
+import * as Base from './../base';
+import { ProgressItem } from './../base';
 
 export namespace Action {
   /**
@@ -20,7 +20,7 @@ export namespace Action {
    * Provide action for progress display view model.
    */
   export interface ProviderType {
-    progress: Type;
+    readonly progress: Type;
   }
 
   /**
@@ -47,7 +47,7 @@ export namespace Provider {
    * @extends {ReduxStore.Provider.Type} Store provider extension.
    */
   export interface Type extends ReduxStore.Provider.Type {
-    action: Action.ProviderType;
+    readonly action: Action.ProviderType;
   }
 }
 
@@ -83,7 +83,7 @@ export namespace ViewModel {
     private readonly provider: Provider.Type;
     private readonly baseVM: Base.ViewModel.DisplayType;
 
-    public get screen(): Nullable<MVVM.Navigation.Screen.Type> {
+    public get screen(): Nullable<MVVM.Navigation.Screen.BaseType> {
       return this.baseVM.screen;
     }
 
@@ -95,7 +95,7 @@ export namespace ViewModel {
     public initialize = (): void => {};
     public deinitialize = (): void => {};
 
-    public stateStream = (): Observable<Try<S.Self<any>>> => {
+    public stateStream = (): Observable<Try<S.Type<any>>> => {
       return this.baseVM.stateStream();
     }
 
@@ -107,7 +107,7 @@ export namespace ViewModel {
       return this.baseVM.progressDisplayStream();
     }
 
-    public progressForState(state: Readonly<Nullable<S.Self<any>>>): Try<ProgressItem> {
+    public progressForState(state: Readonly<Nullable<S.Type<any>>>): Try<ProgressItem> {
       return this.baseVM.progressForState(state);
     }
   }

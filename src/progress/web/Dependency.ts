@@ -2,7 +2,8 @@ import { Observable, Observer } from 'rxjs';
 import { Nullable, Try } from 'javascriptutilities';
 import { State as S } from 'type-safe-state-js';
 import { Component, MVVM } from 'react-base-utilities-js';
-import { Base, ProgressItem } from './../dependency';
+import * as Base from './../base';
+import { ProgressItem } from './../base';
 import * as Presets from './presets';
 
 export namespace Identity {
@@ -37,7 +38,7 @@ export namespace Identity {
    * Provide identity for progress display component.
    */
   export interface ProviderType {
-    progress?: SelectorType;
+    readonly progress?: SelectorType;
   }
 
   /**
@@ -120,7 +121,7 @@ export namespace ViewModel {
     private readonly provider: Provider.Type;
     private readonly pgVM: Base.ViewModel.DisplayType;
 
-    public get screen(): Nullable<MVVM.Navigation.Screen.Type> {
+    public get screen(): Nullable<MVVM.Navigation.Screen.BaseType> {
       return undefined;
     }
 
@@ -132,7 +133,7 @@ export namespace ViewModel {
     public initialize = (): void => {};
     public deinitialize = (): void => {};
 
-    public stateStream = (): Observable<Try<S.Self<any>>> => {
+    public stateStream = (): Observable<Try<S.Type<any>>> => {
       return this.pgVM.stateStream();
     }
 
@@ -148,7 +149,7 @@ export namespace ViewModel {
       return new Presets.ViewModel.Self(this.provider);
     }
 
-    public progressForState(state: Readonly<Nullable<S.Self<any>>>): Try<ProgressItem> {
+    public progressForState(state: Readonly<Nullable<S.Type<any>>>): Try<ProgressItem> {
       return this.pgVM.progressForState(state);
     }
   }

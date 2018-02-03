@@ -11,14 +11,14 @@ export namespace Action {
    * Base action for progress display view model.
    */
   export interface Type {
-    fullProgressValuePath: string;
+    readonly fullProgressValuePath: string;
   }
 
   /**
    * Provide action for progress display view model.
    */
   export interface ProviderType {
-    progress: Type;
+    readonly progress: Type;
   }
 }
 
@@ -28,7 +28,7 @@ export namespace Provider {
    * @extends {ReduxStore.Provider.Type} Store provider extension.
    */
   export interface Type extends ReduxStore.Provider.Type {
-    action: Action.ProviderType;
+    readonly action: Action.ProviderType;
   }
 }
 
@@ -49,7 +49,7 @@ export namespace ViewModel {
    * @extends {Type} Type extension.
    */
   export interface DisplayType extends MVVM.ViewModel.ReduxType, Type {
-    progressForState(state: Readonly<Nullable<S.Self<any>>>): Try<ProgressItem>;
+    progressForState(state: Readonly<Nullable<S.Type<any>>>): Try<ProgressItem>;
   }
 
   /**
@@ -66,7 +66,7 @@ export namespace ViewModel {
   export class Self implements DisplayType {
     private readonly provider: Provider.Type;
 
-    public get screen(): Nullable<MVVM.Navigation.Screen.Type> {
+    public get screen(): Nullable<MVVM.Navigation.Screen.BaseType> {
       return undefined;
     }
 
@@ -93,7 +93,7 @@ export namespace ViewModel {
     public initialize = (): void => {};
     public deinitialize = (): void => {};
 
-    public stateStream = (): Observable<Try<S.Self<any>>> => {
+    public stateStream = (): Observable<Try<S.Type<any>>> => {
       let path = this.substatePath;
       return this.provider.store.stateStream().map(v => v.substateAtNode(path));
     }
@@ -115,7 +115,7 @@ export namespace ViewModel {
         .map(v => v.map(v1 => v1 as ProgressItem));
     }
 
-    public progressForState(state: Nullable<Readonly<S.Self<any>>>): Try<ProgressItem> {
+    public progressForState(state: Nullable<Readonly<S.Type<any>>>): Try<ProgressItem> {
       let path = this.progressValuePath;
 
       return Try.unwrap(state)

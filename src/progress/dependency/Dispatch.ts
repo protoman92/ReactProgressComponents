@@ -3,8 +3,8 @@ import { Nullable, Try } from 'javascriptutilities';
 import { State as S } from 'type-safe-state-js';
 import { DispatchReducer, ReduxStore as Store } from 'reactive-rx-redux-js';
 import { MVVM } from 'react-base-utilities-js';
-import * as Base from './base';
-import { ProgressItem } from './base';
+import * as Base from './../base';
+import { ProgressItem } from './../base';
 
 export namespace Action {
   export let UPDATE_PROGRESS_ACTION = 'UPDATE_PROGRESS_ACTION';
@@ -21,7 +21,7 @@ export namespace Action {
    * Provide the action creator progress namespace.
    */
   export interface ProviderType {
-    progress: CreatorType;
+    readonly progress: CreatorType;
   }
 
   /**
@@ -59,7 +59,7 @@ export namespace Reducer {
    * @returns {DispatchReducer<any>} A DispatchReducer instance.
    */
   export let createDefault = (): DispatchReducer<any> => {
-    return (state: S.Self<any>, action: Store.Dispatch.Action.Type<any>) => {
+    return (state: S.Type<any>, action: Store.Dispatch.Action.Type<any>) => {
       switch (action.id) {
         case Action.UPDATE_PROGRESS_ACTION:
           return state.updatingValue(action.fullValuePath, action.payload);
@@ -77,8 +77,8 @@ export namespace Provider {
    * @extends {Base.Provider.Type} Base provider extension.
    */
   export interface Type extends Base.Provider.Type {
-    action: Action.ProviderType;
-    store: Store.Dispatch.Self;
+    readonly action: Action.ProviderType;
+    readonly store: Store.Dispatch.Self;
   }
 }
 
@@ -97,7 +97,7 @@ export namespace ViewModel {
     private readonly provider: Provider.Type;
     private readonly baseVM: Base.ViewModel.DisplayType;
 
-    public get screen(): Nullable<MVVM.Navigation.Screen.Type> {
+    public get screen(): Nullable<MVVM.Navigation.Screen.BaseType> {
       return this.baseVM.screen;
     }
 
@@ -109,7 +109,7 @@ export namespace ViewModel {
     public initialize = (): void => {};
     public deinitialize = (): void => {};
 
-    public stateStream = (): Observable<Try<S.Self<any>>> => {
+    public stateStream = (): Observable<Try<S.Type<any>>> => {
       return this.baseVM.stateStream();
     }
 
@@ -122,7 +122,7 @@ export namespace ViewModel {
       return this.baseVM.progressDisplayStream();
     }
 
-    public progressForState(state: Readonly<Nullable<S.Self<any>>>): Try<ProgressItem> {
+    public progressForState(state: Readonly<Nullable<S.Type<any>>>): Try<ProgressItem> {
       return this.baseVM.progressForState(state);
     }
   }
